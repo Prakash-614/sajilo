@@ -11,6 +11,7 @@ if (!isset($_SESSION['cart'])) {
 // Initialize flash messages
 if (!isset($_SESSION['flash'])) {
     $_SESSION['flash'] = [];
+    
 }
 
 // Base URL for redirects
