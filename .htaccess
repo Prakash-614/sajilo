@@ -1,0 +1,40 @@
+# Prevent directory browsing
+Options -Indexes
+
+# Set default character set
+AddDefaultCharset UTF-8
+
+# Protect sensitive files
+<FilesMatch "^(config\.php|database\.php|functions\.php|session\.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protect log files
+<FilesMatch "\.(log|sql)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Enable URL rewriting (optional)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /sajilo/
+    
+    # Redirect to HTTPS (enable in production)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Remove .php extension (optional)
+    # RewriteCond %{REQUEST_FILENAME} !-d
+    # RewriteCond %{REQUEST_FILENAME}\.php -f
+    # RewriteRule ^(.*)$ $1.php [L]
+</IfModule>
+
+# Set PHP configuration
+<IfModule mod_php.c>
+    php_value upload_max_filesize 5M
+    php_value post_max_size 6M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+</IfModule>
