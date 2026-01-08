@@ -10,6 +10,7 @@
     @keyframes slideIn {
         from {
             opacity: 0;
+            
             transform: translateX(20px);
         }
 
